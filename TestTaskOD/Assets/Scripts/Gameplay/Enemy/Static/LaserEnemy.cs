@@ -40,10 +40,7 @@ namespace gameDream
                     on = !on;
                     itemKill.SetActive(on);
                 }
-                else
-                {
-                    yield return null;
-                }
+                else yield return null;
                 yield return new WaitForSeconds(interval);
             }
         }

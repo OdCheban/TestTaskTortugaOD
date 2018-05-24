@@ -11,11 +11,9 @@ namespace gameDream
         public Vector2 bordersSpawnX;
         List<string> pathEnemyDynamic = new List<string>();
         List<DynamicEnemy> dynamicEnemy = new List<DynamicEnemy>();
-        [SerializeField]
-        float intervalSpawn;
-        GameObject fatherEnemy;
-
-        float timeStop;
+        [SerializeField] float intervalSpawn;
+        private GameObject fatherEnemy;
+        private float timeStop;
 
         void GetEnemeyFileNames()//или если проще = вручную в инспекторе или в файле прописать имена всех врагов.
         {
@@ -29,10 +27,12 @@ namespace gameDream
                 pathEnemyDynamic.Add(path);
             }
         }
+
         void Start()
         {
             GetEnemeyFileNames();
             mg = GetComponent<ManagementGame>();
+
             fatherEnemy = new GameObject("FatherEnemy");
             StartCoroutine(CreateEnemy());
         }
@@ -52,13 +52,12 @@ namespace gameDream
         {
             while (true)
             {
-                GameObject enemy = (GameObject)Instantiate(Resources.Load(pathEnemyDynamic[Random.Range(0, pathEnemyDynamic.Count)])) as GameObject;
+                GameObject enemy = (GameObject)Instantiate(Resources.Load(pathEnemyDynamic[Random.Range(0, pathEnemyDynamic.Count)]));
                 enemy.transform.position = GetSpawnPosition(enemy);
                 enemy.transform.SetParent(fatherEnemy.transform);
                 dynamicEnemy.Add(enemy.GetComponent<DynamicEnemy>());
                 if (timeStop > 0)
                     enemy.GetComponent<DynamicEnemy>().StopEnemy(timeStop);
-
                 yield return new WaitForSeconds(Random.Range(1, intervalSpawn));
             }
         }

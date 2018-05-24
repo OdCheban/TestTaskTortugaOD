@@ -59,6 +59,7 @@ namespace gameDream
                 }else if (waitDestroySpace)
                 {
                     GetComponent<PlayerStats>().DestroySpace();
+                    waitDestroySpace = false;
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {

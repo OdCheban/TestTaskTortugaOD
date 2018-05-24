@@ -10,7 +10,6 @@ namespace gameDream
     {
         EnemyGenerations eg;
         PlatformBlock[] platform;
-        private int kBlock;//platform.length
         private int _nextBlockN;
         private int _gamePoints;
         Text textPoints;
@@ -33,7 +32,7 @@ namespace gameDream
         {
             get { return _nextBlockN; }
             set {
-                if (value >= kBlock)
+                if (value >= platform.Length)
                     value = 0;
                 _nextBlockN = value;
             }
@@ -49,42 +48,53 @@ namespace gameDream
 
         private void Start()
         {
-            GetEnemyFileNames();
-            GetBonusFileNames();
+            GetPathFiles();
             textPoints = GameObject.Find("Canvas/PointsText").GetComponent<Text>();
             platform = transform.Find("PlatformObjects").GetComponentsInChildren<PlatformBlock>();
             eg = GetComponent<EnemyGenerations>();
-            kBlock = platform.Length;
         }
 
-        void GetEnemyFileNames()//или если проще = вручную в инспекторе или в файле прописать имена всех врагов.
+        void GetPathFiles()
         {
-            DirectoryInfo dir = new DirectoryInfo("Assets/Resources/EnemyStatic");
-            FileInfo[] info = dir.GetFiles("*.prefab");
-            foreach (FileInfo f in info)
-            {
-                string path = f.FullName;
-                path = path.Remove(0, path.IndexOf("EnemyStatic"));
-                path = path.Replace(".prefab", "");
-                pathEnemyStatic.Add(path);
-            }
+            pathEnemyStatic = GetFileNames("Assets/Resources/EnemyStatic", "EnemyStatic");
+            pathBonus = GetFileNames("Assets/Resources/Bonus", "Bonus");
         }
-        void GetBonusFileNames()//или если проще = вручную в инспекторе или в файле прописать имена всех врагов.
+        List<string> GetFileNames(string pathToFolder,string endFolder)//или если проще = вручную в инспекторе или в файле прописать имена всех врагов.
         {
-            DirectoryInfo dir = new DirectoryInfo("Assets/Resources/Bonus");
+            List<string> pathList = new List<string>();
+            DirectoryInfo dir = new DirectoryInfo(pathToFolder);
             FileInfo[] info = dir.GetFiles("*.prefab");
             foreach (FileInfo f in info)
             {
                 string path = f.FullName;
-                path = path.Remove(0, path.IndexOf("Bonus"));
+                path = path.Remove(0, path.IndexOf(endFolder));
                 path = path.Replace(".prefab", "");
-                pathBonus.Add(path);
+                pathList.Add(path);
             }
+            return pathList;
         }
 
         public int GetCoordLastPos()
         {
-            return kBlock + GamePoints;
+            return platform.Length + GamePoints;
+        }
+
+        void CreateObstacle()
+        {
+            GameObject enemyStatic = (GameObject)Instantiate(Resources.Load(pathEnemyStatic[Random.Range(0, pathEnemyStatic.Count)]));
+            enemyStatic.transform.position = platform[NextBlockN].transform.position;
+            enemyStatic.transform.SetParent(platform[NextBlockN].transform);
+            stEnemyList.Add(enemyStatic.GetComponent<StaticEnemy>());
+            enemyStatic.GetComponent<StaticEnemy>().Activate();////?? StopEnemy faster Start ??
+
+            if (timeStop > 0)
+                enemyStatic.GetComponent<StaticEnemy>().StopEnemy(timeStop);
+        }
+        void CreateBonus()
+        {
+            GameObject bonusObj = (GameObject)Instantiate(Resources.Load(pathBonus[Random.Range(0, pathBonus.Count)])) as GameObject;
+            bonusObj.transform.position = new Vector3(Random.Range(eg.bordersSpawnX.x, eg.bordersSpawnX.y), platform[NextBlockN].transform.position.y + 1.0f, platform[NextBlockN].transform.position.z);
+            bonusObj.transform.SetParent(platform[NextBlockN].transform);
         }
 
         void SpawnObstacle()
@@ -93,29 +103,17 @@ namespace gameDream
             if (chance < chanceObstacle && !lastCreate)//шанс появления препятствия 
             {
                 lastCreate = true;
-                GameObject enemyStatic = (GameObject)Instantiate(Resources.Load(pathEnemyStatic[Random.Range(0, pathEnemyStatic.Count)])) as GameObject;
-                enemyStatic.transform.position = platform[NextBlockN].transform.position;
-                enemyStatic.transform.SetParent(platform[NextBlockN].transform);
-                stEnemyList.Add(enemyStatic.GetComponent<StaticEnemy>());
-                enemyStatic.GetComponent<StaticEnemy>().Activate();////?? StopEnemy faster Start ??
-
-                if (timeStop > 0)
-                    enemyStatic.GetComponent<StaticEnemy>().StopEnemy(timeStop);
+                CreateObstacle();
             }
             else
-            {
                 lastCreate = false;
-            }
         }
-
         void SpawnBonus()
         {
             int chance = Random.Range(0, 100);
             if (chance < chanceBonus)//шанс появления препятствия 
             {
-                GameObject bonusObj = (GameObject)Instantiate(Resources.Load(pathBonus[Random.Range(0, pathBonus.Count)])) as GameObject;
-                bonusObj.transform.position = new Vector3(Random.Range(eg.bordersSpawnX.x, eg.bordersSpawnX.y), platform[NextBlockN].transform.position.y + 1.0f, platform[NextBlockN].transform.position.z);
-                bonusObj.transform.SetParent(platform[NextBlockN].transform);
+                CreateBonus();
             }
         }
 
@@ -131,7 +129,7 @@ namespace gameDream
 
         void Update()
         {
-            if (timeStop > 0)
+            if (timeStop > 0)//Invoke does not fit
                 timeStop -= Time.deltaTime;
             else if (timeStop <= 0 && timeStop > -1)
             {
@@ -145,12 +143,7 @@ namespace gameDream
             timeStop = sec;
             for (int i = 0; i < stEnemyList.Count; i++)
                 if (stEnemyList[i])
-                {
                     stEnemyList[i].StopEnemy(sec);
-                }
-                //else
-                    //stEnemyList.RemoveAt(i);
-
             eg.StopEnemy(sec);
         }
 

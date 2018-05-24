@@ -6,6 +6,14 @@ namespace gameDream
 {
     public class TrigStaticEnemy : MonoBehaviour
     {
+        GameObject GetParent()
+        {
+            GameObject parentObj =  transform.parent.gameObject;
+            while (!parentObj.GetComponent<StaticEnemy>())
+                parentObj = parentObj.transform.parent.gameObject;
+            return parentObj;
+        }
+
         void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")
@@ -13,11 +21,7 @@ namespace gameDream
                 if (other.GetComponent<PlayerStats>() && other.GetComponent<PlayerStats>().shield)
                 {
                     other.GetComponent<PlayerStats>().DestroyShield();
-
-                    GameObject parentObj = transform.parent.gameObject;
-                    while (!parentObj.GetComponent<StaticEnemy>())
-                        parentObj = parentObj.transform.parent.gameObject;
-                    Destroy(parentObj);
+                    Destroy(GetParent());
                 }
                 else
                 {
