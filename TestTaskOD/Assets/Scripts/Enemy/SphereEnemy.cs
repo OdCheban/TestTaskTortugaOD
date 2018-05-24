@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace gameDream
 {
-    public class SphereEnemy : Enemy
+    public class SphereEnemy : DynamicEnemy
     {
 
     }

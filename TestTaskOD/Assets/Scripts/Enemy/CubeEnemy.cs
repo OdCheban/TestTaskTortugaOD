@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace gameDream
 {
-    public class CubeEnemy : Enemy
+    public class CubeEnemy : DynamicEnemy
     {
         bool side;
         public float speedRotate;

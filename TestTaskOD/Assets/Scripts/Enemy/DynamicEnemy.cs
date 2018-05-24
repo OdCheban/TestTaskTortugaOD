@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace gameDream
 {
-    public class Enemy : MonoBehaviour
+    public class DynamicEnemy : MonoBehaviour
     {
         [SerializeField]
         float radiusEnemy;
@@ -45,8 +45,8 @@ namespace gameDream
             MoveEnemy();
             RotateEnemy();
         }
-
-        private void OnTriggerEnter(Collider other)
+        
+        void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")
             {
