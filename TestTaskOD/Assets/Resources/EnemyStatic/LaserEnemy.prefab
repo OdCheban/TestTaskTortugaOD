@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33702870301268702}
   - component: {fileID: 65528480566595650}
   - component: {fileID: 23784846509829274}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33273120294760712}
   - component: {fileID: 65222581026511192}
   - component: {fileID: 23724269375975792}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,9 +55,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4274395042104364}
-  - component: {fileID: 114925409724448718}
   - component: {fileID: 65561091032167688}
-  m_Layer: 0
+  - component: {fileID: 114895255646680168}
+  m_Layer: 2
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709346626803496}
   - component: {fileID: 114496149848280058}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LaserEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4828078157934706}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 33340388734357202}
   - component: {fileID: 65665185140540376}
   - component: {fileID: 23377427388986552}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4360060650622698}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 33326072828385160}
   - component: {fileID: 65967078806252536}
   - component: {fileID: 23708653876782020}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 33868726837830656}
   - component: {fileID: 65491788845170740}
   - component: {fileID: 23486501054719300}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 2
---- !u!114 &114925409724448718
+--- !u!114 &114895255646680168
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -586,6 +586,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234869346605692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87da6c69332941546a2287f5e0adce70, type: 3}
+  m_Script: {fileID: 11500000, guid: 53848b5f3fd54ab4dbb7085a24f5bbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

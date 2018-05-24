@@ -6,7 +6,7 @@ public class PlatformBlock : MonoBehaviour {
     
     public void ClearObstacle()
     {
-        if (transform.childCount > 0)
-            Destroy(transform.GetChild(0).gameObject);
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
     }
 }

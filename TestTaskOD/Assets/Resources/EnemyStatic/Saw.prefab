@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4361453680364974}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4425665030783334}
   - component: {fileID: 33174366701863334}
   - component: {fileID: 23771375852066948}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Saw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4105641873115450}
   - component: {fileID: 33187590600346966}
   - component: {fileID: 23174683862268250}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Saw2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ GameObject:
   - component: {fileID: 23305309268185128}
   - component: {fileID: 65525067809770200}
   - component: {fileID: 95946431277889560}
-  - component: {fileID: 114967755040176318}
-  m_Layer: 0
+  - component: {fileID: 114966697836469654}
+  m_Layer: 2
   m_Name: DynamicSaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4741738960830284}
-  m_Layer: 0
+  - component: {fileID: 114936596858071656}
+  m_Layer: 2
   m_Name: Saw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960206463155294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -2.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4361453680364974}
@@ -316,7 +317,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114967755040176318
+--- !u!114 &114936596858071656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1960206463155294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4f12d8b00860b74391bf707ce859a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114966697836469654
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -324,6 +336,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1922446430815146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87da6c69332941546a2287f5e0adce70, type: 3}
+  m_Script: {fileID: 11500000, guid: 53848b5f3fd54ab4dbb7085a24f5bbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

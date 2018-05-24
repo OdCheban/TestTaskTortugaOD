@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace gameDream
 {
-    public class StaticEnemy : MonoBehaviour
+    public class ShieldBonus : MonoBehaviour
     {
-        void OnTriggerEnter(Collider other)
+
+        private void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")
             {
-                Time.timeScale = 0;
+                other.GetComponent<PlayerStats>().GetShield();
+                Destroy(gameObject);
             }
         }
     }

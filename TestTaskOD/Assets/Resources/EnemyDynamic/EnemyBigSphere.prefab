@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 135082951640723206}
   - component: {fileID: 23218620648214428}
   - component: {fileID: 114283008424800290}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyBigSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
