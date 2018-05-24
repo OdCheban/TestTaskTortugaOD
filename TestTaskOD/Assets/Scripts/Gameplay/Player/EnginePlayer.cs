@@ -8,12 +8,21 @@ namespace gameDream
     public class EnginePlayer : MonoBehaviour
     {
         ManagementGame GameControl;
-
         public Vector3 moveDir = Vector3.zero;
         public float gravity;
         public float jumpSpeed;
         private float radiusPlayer;
         CharacterController controller;
+
+        int _kJumpSpace;
+        public int KJumpSpace
+        {
+            get { return _kJumpSpace; }
+            set {
+                _kJumpSpace = value;
+            }
+        }
+        bool waitDestroySpace;
 
         private void Start()
         {
@@ -26,6 +35,17 @@ namespace gameDream
         {
             return (Physics.Raycast(transform.position, -Vector3.up, radiusPlayer)) ? true : false;
         }
+
+        void IfSpace()
+        {
+            if (KJumpSpace > 0)
+            {
+                GameControl.NextPlatform();
+                KJumpSpace--;
+                waitDestroySpace = (KJumpSpace == 0) ? true : false;
+            }
+        }
+
         private void Update()
         {
             if (Physics.Raycast(transform.position, Vector3.forward, radiusPlayer) && IsGround())
@@ -33,8 +53,12 @@ namespace gameDream
                 moveDir = Vector3.zero;
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    IfSpace();
                     GameControl.NextPlatform();
                     moveDir = new Vector3(0, jumpSpeed, 3);
+                }else if (waitDestroySpace)
+                {
+                    GetComponent<PlayerStats>().DestroySpace();
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {

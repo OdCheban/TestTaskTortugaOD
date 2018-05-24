@@ -4,11 +4,13 @@ using UnityEngine;
 
 namespace gameDream
 {
-    public class ShieldBonus : Bonus
+    public class SpaceBonus : Bonus
     {
+        [SerializeField]
+        int jumpKSpace;
         protected override void BonusAdd(Transform other)
         {
-            other.GetComponent<PlayerStats>().GetShield();
+            other.GetComponent<PlayerStats>().GetSpace(jumpKSpace);
         }
     }
 }
