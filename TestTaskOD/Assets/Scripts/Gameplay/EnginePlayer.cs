@@ -21,10 +21,7 @@ public class EnginePlayer : MonoBehaviour {
 
     bool IsGround()
     {
-        if (Physics.Raycast(transform.position, -Vector3.up, radiusPlayer))
-            return true;
-        else
-            return false;
+        return (Physics.Raycast(transform.position, -Vector3.up, radiusPlayer)) ? true : false;
     }
     private void Update()
     {
@@ -46,7 +43,6 @@ public class EnginePlayer : MonoBehaviour {
             }
         }
         moveDir.y -= gravity * Time.deltaTime;
-
         controller.Move(moveDir * Time.deltaTime);
     }
 

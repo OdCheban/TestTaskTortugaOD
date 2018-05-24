@@ -6,39 +6,44 @@ namespace gameDream
 {
     public class Enemy : MonoBehaviour
     {
-        float radiusPlayer;
+        [SerializeField]
+        float radiusEnemy;
         Vector3 moveDir = Vector3.zero;
         [SerializeField]
-        float jumpSpeed;
+        protected float jumpSpeed;
         [SerializeField]
         float gravity;
 
-        protected virtual float GetRadius()
-        {
-            return 0;
-        }
         private void Start()
         {
             Destroy(gameObject, 10.0f);
-            radiusPlayer = GetRadius();
         }
 
         bool IsGround()
         {
-            if (Physics.Raycast(transform.position, -Vector3.up, radiusPlayer))
-                return true;
-            else
-                return false;
+            return (Physics.Raycast(transform.position, -Vector3.up, radiusEnemy)) ? true : false;
         }
-
-        private void Update()
+        protected virtual Vector3 GetDir()
+        {
+            return new Vector3(0, jumpSpeed, -1.0f);
+        }
+        protected virtual void RotateEnemy()
+        {
+            
+        }
+        private void MoveEnemy()
         {
             if (IsGround())
             {
-                moveDir = new Vector3(0, jumpSpeed, -1.0f);
+                moveDir = GetDir();
             }
             moveDir.y -= gravity * Time.deltaTime;
             transform.position += moveDir * Time.deltaTime;
+        }
+        private void Update()
+        {
+            MoveEnemy();
+            RotateEnemy();
         }
 
         private void OnTriggerEnter(Collider other)
