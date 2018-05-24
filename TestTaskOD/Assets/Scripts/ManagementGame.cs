@@ -20,7 +20,7 @@ public class ManagementGame : MonoBehaviour {
     private void Start()
     {
         textPoints = GameObject.Find("Canvas/PointsText").GetComponent<Text>();
-        platform = transform.Find("Platform").GetComponentsInChildren<PlatformBlock>();
+        platform = transform.Find("PlatformObjects").GetComponentsInChildren<PlatformBlock>();
         kBlock = platform.Length;
     }
 

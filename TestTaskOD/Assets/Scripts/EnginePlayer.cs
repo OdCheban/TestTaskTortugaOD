@@ -28,7 +28,6 @@ public class EnginePlayer : MonoBehaviour {
     }
     private void Update()
     {
-        Debug.DrawRay(transform.position, Vector3.forward, Color.green);
         if (Physics.Raycast(transform.position, Vector3.forward, radiusPlayer) && IsGround())
         {
             moveDir = Vector3.zero;
