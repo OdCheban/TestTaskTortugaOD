@@ -4,6 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class EnginePlayer : MonoBehaviour {
+    ManagementGame GameControl;
+
     public Vector3 moveDir = Vector3.zero;
     public float gravity;
     public float jumpSpeed;
@@ -12,26 +14,36 @@ public class EnginePlayer : MonoBehaviour {
 
     private void Start()
     {
+        GameControl = GameObject.Find("GamePlay").GetComponent<ManagementGame>();
         controller = GetComponent<CharacterController>();
         radiusPlayer = GetComponent<CharacterController>().radius + 0.1f;
     }
 
-    private void Update()
+    bool IsGround()
     {
         if (Physics.Raycast(transform.position, -Vector3.up, radiusPlayer))
+            return true;
+        else
+            return false;
+    }
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, Vector3.forward, Color.green);
+        if (Physics.Raycast(transform.position, Vector3.forward, radiusPlayer) && IsGround())
         {
             moveDir = Vector3.zero;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                moveDir = new Vector3(0, jumpSpeed, 1);
+                GameControl.NextPlatform();
+                moveDir = new Vector3(0, jumpSpeed, 3);
             }
             if (Input.GetKeyDown(KeyCode.A))
             {
-                moveDir = new Vector3(-1, jumpSpeed, 0);
+                moveDir = new Vector3(-3, jumpSpeed, 0);
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
-                moveDir = new Vector3(1, jumpSpeed, 0);
+                moveDir = new Vector3(3, jumpSpeed, 0);
             }
         }
         moveDir.y -= gravity * Time.deltaTime;
