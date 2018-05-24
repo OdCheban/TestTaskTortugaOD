@@ -17,10 +17,13 @@ namespace gameDream
                     GameObject parentObj = transform.parent.gameObject;
                     while (!parentObj.GetComponent<StaticEnemy>())
                         parentObj = parentObj.transform.parent.gameObject;
-                   Destroy(parentObj);
+                    Destroy(parentObj);
                 }
                 else
+                {
+                    AllFunc.Defeat();
                     Time.timeScale = 0;
+                }
             }
         }
     }

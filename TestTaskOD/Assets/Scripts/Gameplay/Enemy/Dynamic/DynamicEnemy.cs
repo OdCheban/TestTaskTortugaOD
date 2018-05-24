@@ -62,7 +62,10 @@ namespace gameDream
                     Destroy(gameObject);
                 }
                 else
+                {
+                    AllFunc.Defeat();
                     Time.timeScale = 0;
+                }
             }
         }
 
