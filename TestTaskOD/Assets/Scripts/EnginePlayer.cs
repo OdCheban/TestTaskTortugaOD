@@ -46,6 +46,7 @@ public class EnginePlayer : MonoBehaviour {
             }
         }
         moveDir.y -= gravity * Time.deltaTime;
+
         controller.Move(moveDir * Time.deltaTime);
     }
 
