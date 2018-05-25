@@ -9,28 +9,17 @@ namespace gameDream
     {
         ManagementGame mg;
         public Vector2 bordersSpawnX;
-        List<string> pathEnemyDynamic = new List<string>();
+        string[] pathEnemyDynamic;
         List<DynamicEnemy> dynamicEnemy = new List<DynamicEnemy>();
         [SerializeField] float intervalSpawn;
         private GameObject fatherEnemy;
         private float timeStop;
 
-        void GetEnemeyFileNames()//или если проще = вручную в инспекторе или в файле прописать имена всех врагов.
-        {
-            DirectoryInfo dir = new DirectoryInfo("Assets/Resources/EnemyDynamic");
-            FileInfo[] info = dir.GetFiles("*.prefab");
-            foreach (FileInfo f in info)
-            {
-                string path = f.FullName;
-                path = path.Remove(0, path.IndexOf("EnemyDynamic"));
-                path = path.Replace(".prefab", "");
-                pathEnemyDynamic.Add(path);
-            }
-        }
+
 
         void Start()
         {
-            GetEnemeyFileNames();
+            pathEnemyDynamic = AllFunc.GetPathEnemyDynamic();
             mg = GetComponent<ManagementGame>();
 
             fatherEnemy = new GameObject("FatherEnemy");
@@ -52,7 +41,7 @@ namespace gameDream
         {
             while (true)
             {
-                GameObject enemy = (GameObject)Instantiate(Resources.Load(pathEnemyDynamic[Random.Range(0, pathEnemyDynamic.Count)]));
+                GameObject enemy = (GameObject)Instantiate(Resources.Load(pathEnemyDynamic[Random.Range(0, pathEnemyDynamic.Length)]));
                 enemy.transform.position = GetSpawnPosition(enemy);
                 enemy.transform.SetParent(fatherEnemy.transform);
                 dynamicEnemy.Add(enemy.GetComponent<DynamicEnemy>());
@@ -71,7 +60,8 @@ namespace gameDream
         {
             timeStop = sec;
             foreach (DynamicEnemy de in dynamicEnemy)
-                de.StopEnemy(sec);
+                if(de)
+                    de.StopEnemy(sec);
         }
 
         public void СontinueEnemy()

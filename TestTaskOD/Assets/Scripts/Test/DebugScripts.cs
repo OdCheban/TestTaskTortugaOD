@@ -6,6 +6,7 @@ using UnityEditor;
 #endif
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR 
 public class DebugScripts : EditorWindow
 {
     public static DebugScripts winst;
@@ -32,3 +33,4 @@ public class DebugScripts : EditorWindow
         }
     }
 }
+#endif

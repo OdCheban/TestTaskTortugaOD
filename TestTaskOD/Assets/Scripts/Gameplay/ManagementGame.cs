@@ -9,19 +9,20 @@ namespace gameDream
     public class ManagementGame : MonoBehaviour, TimeControl
     {
         EnemyGenerations eg;
+        [SerializeField]
         PlatformBlock[] platform;
         private int _nextBlockN;
         private int _gamePoints;
         Text textPoints;
 
+        string[] pathEnemyStatic;
+        string[] pathBonus;
         //статичные препятствия
-        List<string> pathEnemyStatic = new List<string>();
         List<StaticEnemy> stEnemyList = new List<StaticEnemy>();
         [SerializeField][Range(0, 100)]
         int chanceObstacle;
         bool lastCreate;//2 прептятвия подряд это плохо.
 
-        List<string> pathBonus = new List<string>();
         [SerializeField]
         [Range(0, 100)]
         int chanceBonus;
@@ -48,30 +49,11 @@ namespace gameDream
 
         private void Start()
         {
-            GetPathFiles();
-            textPoints = GameObject.Find("Canvas/PointsText").GetComponent<Text>();
-            platform = transform.Find("PlatformObjects").GetComponentsInChildren<PlatformBlock>();
-            eg = GetComponent<EnemyGenerations>();
-        }
+            pathEnemyStatic = AllFunc.GetPathEnemyStatic();
+            pathBonus = AllFunc.GetPathBonus();
 
-        void GetPathFiles()
-        {
-            pathEnemyStatic = GetFileNames("Assets/Resources/EnemyStatic", "EnemyStatic");
-            pathBonus = GetFileNames("Assets/Resources/Bonus", "Bonus");
-        }
-        List<string> GetFileNames(string pathToFolder,string endFolder)//или если проще = вручную в инспекторе или в файле прописать имена всех врагов.
-        {
-            List<string> pathList = new List<string>();
-            DirectoryInfo dir = new DirectoryInfo(pathToFolder);
-            FileInfo[] info = dir.GetFiles("*.prefab");
-            foreach (FileInfo f in info)
-            {
-                string path = f.FullName;
-                path = path.Remove(0, path.IndexOf(endFolder));
-                path = path.Replace(".prefab", "");
-                pathList.Add(path);
-            }
-            return pathList;
+            textPoints = GameObject.Find("Canvas/PointsText").GetComponent<Text>();
+            eg = GetComponent<EnemyGenerations>();
         }
 
         public int GetCoordLastPos()
@@ -81,7 +63,7 @@ namespace gameDream
 
         void CreateObstacle()
         {
-            GameObject enemyStatic = (GameObject)Instantiate(Resources.Load(pathEnemyStatic[Random.Range(0, pathEnemyStatic.Count)]));
+            GameObject enemyStatic = (GameObject)Instantiate(Resources.Load(pathEnemyStatic[Random.Range(0, pathEnemyStatic.Length)]));
             enemyStatic.transform.position = platform[NextBlockN].transform.position;
             enemyStatic.transform.SetParent(platform[NextBlockN].transform);
             stEnemyList.Add(enemyStatic.GetComponent<StaticEnemy>());
@@ -92,7 +74,7 @@ namespace gameDream
         }
         void CreateBonus()
         {
-            GameObject bonusObj = (GameObject)Instantiate(Resources.Load(pathBonus[Random.Range(0, pathBonus.Count)])) as GameObject;
+            GameObject bonusObj = (GameObject)Instantiate(Resources.Load(pathBonus[Random.Range(0, pathBonus.Length)])) as GameObject;
             bonusObj.transform.position = new Vector3(Random.Range(eg.bordersSpawnX.x, eg.bordersSpawnX.y), platform[NextBlockN].transform.position.y + 1.0f, platform[NextBlockN].transform.position.z);
             bonusObj.transform.SetParent(platform[NextBlockN].transform);
         }

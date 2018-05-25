@@ -22,7 +22,8 @@ namespace gameDream
                 _kJumpSpace = value;
             }
         }
-        bool waitDestroySpace;
+        bool destroySpaceAfterJump;
+        bool jump;
 
         private void Start()
         {
@@ -33,7 +34,7 @@ namespace gameDream
 
         bool IsGround()
         {
-            return (Physics.Raycast(transform.position, -Vector3.up, radiusPlayer)) ? true : false;
+            return (Physics.Raycast(transform.position, Vector3.forward, radiusPlayer) && Physics.Raycast(transform.position, -Vector3.up, radiusPlayer)) ? true : false;
         }
 
         void IfSpace()
@@ -42,37 +43,54 @@ namespace gameDream
             {
                 GameControl.NextPlatform();
                 KJumpSpace--;
-                waitDestroySpace = (KJumpSpace == 0) ? true : false;
+                destroySpaceAfterJump = (KJumpSpace == 0) ? true : false;
             }
         }
 
         private void Update()
         {
-            if (Physics.Raycast(transform.position, Vector3.forward, radiusPlayer) && IsGround())
-            {
-                moveDir = Vector3.zero;
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    IfSpace();
-                    GameControl.NextPlatform();
-                    moveDir = new Vector3(0, jumpSpeed, 3);
-                }else if (waitDestroySpace)
-                {
-                    GetComponent<PlayerStats>().DestroySpace();
-                    waitDestroySpace = false;
-                }
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    moveDir = new Vector3(-3, jumpSpeed, 0);
-                }
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    moveDir = new Vector3(3, jumpSpeed, 0);
-                }
-            }
+            //#if UNITY_EDITOR
+            //Action("Idle");
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //    Action("Forward");
+            //if (Input.GetKeyDown(KeyCode.A))
+            //    Action("Left");
+            //if (Input.GetKeyDown(KeyCode.D))
+            //    Action("Right");
+            //#endif
+
             moveDir.y -= gravity * Time.deltaTime;
             controller.Move(moveDir * Time.deltaTime);
         }
 
+        public void Action(string Dir)
+        {
+            if (IsGround())
+            {
+                switch (Dir)
+                {
+                    case "Forward":
+                        IfSpace();
+                        GameControl.NextPlatform();
+                        moveDir = new Vector3(0, jumpSpeed, 3);
+                        break;
+                    case "Left":
+                        moveDir = new Vector3(-3, jumpSpeed, 0);
+                        break;
+                    case "Right":
+                        moveDir = new Vector3(3, jumpSpeed, 0);
+                        break;
+                    case "Idle":
+                        moveDir = Vector3.zero;
+                        break;
+                }
+
+                if (destroySpaceAfterJump)
+                {
+                    GetComponent<PlayerStats>().DestroySpace();
+                    destroySpaceAfterJump = false;
+                }
+            }
+        }
     }
 }
