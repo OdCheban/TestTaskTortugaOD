@@ -14,6 +14,7 @@ namespace gameDream
         private int _nextBlockN;
         private int _gamePoints;
         Text textPoints;
+        Transform fallTrigger;
 
         string[] pathEnemyStatic;
         string[] pathBonus;
@@ -27,7 +28,8 @@ namespace gameDream
         [Range(0, 100)]
         int chanceBonus;
 
-        float timeStop;
+        float timeStop;//bonus_time
+
 
         public int NextBlockN // тоже самое что и  GamePoints % kBlock
         {
@@ -52,6 +54,7 @@ namespace gameDream
             pathEnemyStatic = AllFunc.GetPathEnemyStatic();
             pathBonus = AllFunc.GetPathBonus();
 
+            fallTrigger = transform.Find("FallTrigger");
             textPoints = GameObject.Find("Canvas/PointsText").GetComponent<Text>();
             eg = GetComponent<EnemyGenerations>();
         }
@@ -98,7 +101,11 @@ namespace gameDream
                 CreateBonus();
             }
         }
-
+        
+        void RefreshPosFallObj()
+        {
+            fallTrigger.position = platform[NextBlockN].transform.position;
+        }
         public void NextPlatform()
         {
             platform[NextBlockN].transform.position = new Vector3(0, GetCoordLastPos(), GetCoordLastPos());
@@ -106,6 +113,7 @@ namespace gameDream
             SpawnObstacle();
             SpawnBonus();
             NextBlockN++;
+            RefreshPosFallObj();
             GamePoints++;
         }
 

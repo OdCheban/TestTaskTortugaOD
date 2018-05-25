@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
+#if UNITY_ANDROID
 namespace gameDream
 {
     public class SwipePlayer : MonoBehaviour, IDragHandler, IEndDragHandler
@@ -46,3 +46,4 @@ namespace gameDream
         }
     }
 }
+#endif

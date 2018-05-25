@@ -49,15 +49,15 @@ namespace gameDream
 
         private void Update()
         {
-            //#if UNITY_EDITOR
-            //Action("Idle");
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //    Action("Forward");
-            //if (Input.GetKeyDown(KeyCode.A))
-            //    Action("Left");
-            //if (Input.GetKeyDown(KeyCode.D))
-            //    Action("Right");
-            //#endif
+            #if UNITY_EDITOR
+            Action("Idle");
+            if (Input.GetKeyDown(KeyCode.Space))
+                Action("Forward");
+            if (Input.GetKeyDown(KeyCode.A))
+                Action("Left");
+            if (Input.GetKeyDown(KeyCode.D))
+                Action("Right");
+            #endif
 
             moveDir.y -= gravity * Time.deltaTime;
             controller.Move(moveDir * Time.deltaTime);
