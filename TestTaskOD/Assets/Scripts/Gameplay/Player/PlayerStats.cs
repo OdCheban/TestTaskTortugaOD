@@ -13,12 +13,22 @@ namespace gameDream
         GameObject spaceObj;
         float gravityNow;
 
+        public AudioClip giveBonusSound;
+        AudioSource audioSource;
+
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             shieldObj = transform.Find("Shield").gameObject;
             spaceObj = transform.Find("Space").gameObject;
             spaceObj.SetActive(false);
             shieldObj.SetActive(false);
+            gravityNow = GetComponent<EnginePlayer>().gravity;
+        }
+
+        public void GiveBonusSound()
+        {
+            audioSource.PlayOneShot(giveBonusSound);
         }
 
         public void GetShield()
@@ -30,7 +40,6 @@ namespace gameDream
         {
             gameObject.tag = "Astronaut";
             spaceObj.SetActive(true);
-            gravityNow = GetComponent<EnginePlayer>().gravity;
             GetComponent<EnginePlayer>().gravity = 20;
             GetComponent<EnginePlayer>().KJumpSpace += jumpK;
         }
@@ -56,6 +65,8 @@ namespace gameDream
         public void Kill()
         {
             GetComponent<EnginePlayer>().enabled = false;
+            GetComponent<CharacterController>().enabled = false;
+
             GameObject particleDeath = (GameObject)Instantiate(Resources.Load(AllFunc.GetPathParticleDeath())) as GameObject;
             particleDeath.transform.position = transform.position;
             OffRender();

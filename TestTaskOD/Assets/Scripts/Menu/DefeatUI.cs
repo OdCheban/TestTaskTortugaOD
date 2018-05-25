@@ -4,24 +4,61 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+#if UNITY_ANDROID
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
+#endif
 namespace gameDream
 {
     public class DefeatUI : MonoBehaviour {
         public Text pointsText;
         public Text recordText;
 
+        #if UNITY_ANDROID
+        private const string achiv2 = "CgkIyLf06YcTEAIQAg";//10 очков
+        private const string achiv3 = "CgkIyLf06YcTEAIQAw";//смерть
+        private const string leaderBoard = "CgkIyLf06YcTEAIQBA";
+        #endif
+
         public void ActivateDefeate()
         {
+            int point = GameObject.Find("GamePlay").GetComponent<ManagementGame>().GamePoints;
             transform.root.Find("PointsText").GetComponent<Text>().enabled = false;
-            pointsText.text = GameObject.Find("GamePlay").GetComponent<ManagementGame>().GamePoints + "!";
-            recordText.text = "Рекорд: 0";
+            pointsText.text = point+ "!";
             transform.GetChild(0).gameObject.SetActive(true);
             transform.Find("Panel/TopPanel").GetComponent<EasyTween>().enabled = true;
+
+            if (point > PlayerPrefs.GetInt("score"))
+            {
+                PlayerPrefs.SetInt("score", point);
+                #if UNITY_ANDROID
+                Social.ReportScore(point, leaderBoard, (bool success) =>{
+                      if (success) Debug.Log("new record");
+                  });
+                #endif
+            }
+            #if UNITY_ANDROID
+            AllFunc.GetAchive(achiv3);
+            if(point >= 10)
+                AllFunc.GetAchive(achiv2);
+            #endif
+            recordText.text = "Рекорд: " + PlayerPrefs.GetInt("score");
         }
         public void Restart()
         {
             Time.timeScale = 1.0f;
             SceneManager.LoadScene("scGame");
         }
+        #if UNITY_ANDROID
+        public void AchiveGame()
+        {
+            Social.ShowAchievementsUI();
+        }
+        public void LeaderBoardGame()
+        {
+            Social.ShowLeaderboardUI();
+        }
+        #endif
     }
 }

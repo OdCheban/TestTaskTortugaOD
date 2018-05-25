@@ -17,6 +17,7 @@ namespace gameDream
         {
             if (other.tag == "Player" || other.tag == "Astronaut")
             {
+                other.GetComponent<PlayerStats>().GiveBonusSound();
                 BonusAdd(other.transform);
                 Destroy(gameObject);
             }

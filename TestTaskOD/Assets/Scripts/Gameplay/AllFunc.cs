@@ -7,6 +7,15 @@ namespace gameDream
 {
     public class AllFunc : MonoBehaviour
     {
+        #if UNITY_ANDROID
+        public static void GetAchive(string id)
+        {
+            Social.ReportProgress(id, 100, (bool success) => {
+                if (success) Debug.Log("nice");
+            });
+        }
+        #endif
+
         public static void Defeat()
         {
            // Time.timeScale = 0;

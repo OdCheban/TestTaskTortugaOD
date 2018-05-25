@@ -23,7 +23,7 @@ namespace gameDream
                     time += Time.deltaTime;
                 else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)
                 {
-                    if (time < 0.1f)
+                    if (time < 0.15f)
                         player.Action("Forward");
                     time = 0;
                 }

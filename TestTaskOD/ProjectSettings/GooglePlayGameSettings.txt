@@ -1,0 +1,9 @@
+lastUpgrade=00950
+proj.pluginVersion=0.9.50
+proj.AppId=654936185800
+and.BundleId=com.elsetell.voxeljump
+proj.classDir=Assets
+proj.ConstantsClassName=GPG
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--%0d%0aGoogle+Play+game+services+IDs.%0d%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0d%0a--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--+app_id+--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e654936185800%3c%2fstring%3e%0d%0a++%3c%21--+package_name+--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.elsetell.voxeljump%3c%2fstring%3e%0d%0a++%3c%21--+achievement+FirstGame+--%3e%0d%0a++%3cstring+name%3d%22achievement_firstgame%22+translatable%3d%22false%22%3eCgkIyLf06YcTEAIQAQ%3c%2fstring%3e%0d%0a++%3c%21--+achievement+10+Point%21+--%3e%0d%0a++%3cstring+name%3d%22achievement_10_point%22+translatable%3d%22false%22%3eCgkIyLf06YcTEAIQAg%3c%2fstring%3e%0d%0a++%3c%21--+achievement+First+Death+%3d(+--%3e%0d%0a++%3cstring+name%3d%22achievement_first_death%22+translatable%3d%22false%22%3eCgkIyLf06YcTEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--+leaderboard+King+of+the+Mountain+--%3e%0d%0a++%3cstring+name%3d%22leaderboard_king_of_the_mountain%22+translatable%3d%22false%22%3eCgkIyLf06YcTEAIQBA%3c%2fstring%3e%0d%0a%3c%2fresources%3e%0d
+and.ClientId=654936185800-2phij9j6eimavoej1likttvb161ghrpj.apps.googleusercontent.com
+android.SetupDone=true
