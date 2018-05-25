@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace gameDream
 {
@@ -13,6 +14,7 @@ namespace gameDream
         public float jumpSpeed;
         private float radiusPlayer;
         CharacterController controller;
+        float intervalJump;
 
         int _kJumpSpace;
         public int KJumpSpace
@@ -49,6 +51,7 @@ namespace gameDream
 
         private void Update()
         {
+            intervalJump += Time.deltaTime;
             #if UNITY_EDITOR
             Action("Idle");
             if (Input.GetKeyDown(KeyCode.Space))
@@ -63,6 +66,13 @@ namespace gameDream
             controller.Move(moveDir * Time.deltaTime);
         }
 
+        Vector3 GetForceJumpForward()
+        {
+            float z = (intervalJump < 0.5f) ? 5/intervalJump : 3; // 5 - test...
+            intervalJump = 0.0f;
+            return new Vector3(0, jumpSpeed, z);
+        }
+
         public void Action(string Dir)
         {
             if (IsGround())
@@ -72,7 +82,7 @@ namespace gameDream
                     case "Forward":
                         IfSpace();
                         GameControl.NextPlatform();
-                        moveDir = new Vector3(0, jumpSpeed, 3);
+                        moveDir = GetForceJumpForward();
                         break;
                     case "Left":
                         moveDir = new Vector3(-3, jumpSpeed, 0);
