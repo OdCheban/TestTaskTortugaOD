@@ -12,9 +12,11 @@ namespace gameDream
 
         public void ActivateDefeate()
         {
+            transform.root.Find("PointsText").GetComponent<Text>().enabled = false;
             pointsText.text = GameObject.Find("GamePlay").GetComponent<ManagementGame>().GamePoints + "!";
             recordText.text = "Рекорд: 0";
             transform.GetChild(0).gameObject.SetActive(true);
+            transform.Find("Panel/TopPanel").GetComponent<EasyTween>().enabled = true;
         }
         public void Restart()
         {

@@ -11,7 +11,7 @@ public class MenuUI : MonoBehaviour {
 
     void Start()
     {
-        imageSound = transform.Find("BtnSound").GetComponent<Image>();
+        imageSound = transform.Find("Panel/BtnSound").GetComponent<Image>();
     }
     public void PlayGame()
     {

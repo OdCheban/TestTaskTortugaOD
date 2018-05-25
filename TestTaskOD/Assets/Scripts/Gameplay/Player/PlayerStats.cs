@@ -46,5 +46,24 @@ namespace gameDream
             shield = false;
             shieldObj.SetActive(false);
         }
+        
+        void OffRender()
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+            shieldObj.SetActive(false);
+            spaceObj.SetActive(false);
+        }
+        public void Kill()
+        {
+            GetComponent<EnginePlayer>().enabled = false;
+            GameObject particleDeath = (GameObject)Instantiate(Resources.Load(AllFunc.GetPathParticleDeath())) as GameObject;
+            particleDeath.transform.position = transform.position;
+            OffRender();
+            Invoke("DefeatGame", 1.5f);
+        }
+        void DefeatGame()
+        {
+            AllFunc.Defeat();
+        }
     }
 }

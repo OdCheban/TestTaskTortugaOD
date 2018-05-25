@@ -25,8 +25,7 @@ namespace gameDream
                 }
                 else
                 {
-                    AllFunc.Defeat();
-                    Time.timeScale = 0;
+                    other.GetComponent<PlayerStats>().Kill();
                 }
             }
         }

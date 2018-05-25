@@ -8,8 +8,7 @@ namespace gameDream
     {
         void OnTriggerEnter(Collider other)
         {
-            AllFunc.Defeat();
-            Time.timeScale = 0;
+            other.GetComponent<PlayerStats>().Kill();
         }
     }
 }

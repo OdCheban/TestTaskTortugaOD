@@ -9,7 +9,7 @@ namespace gameDream
     {
         public static void Defeat()
         {
-            Time.timeScale = 0;
+           // Time.timeScale = 0;
             GameObject.Find("Canvas/DefeatUI").GetComponent<DefeatUI>().ActivateDefeate();
         }
         public static string[] GetPathEnemyDynamic()
@@ -38,6 +38,10 @@ namespace gameDream
                 "Bonus\\TimerBonus"
             };
             return s;
+        }
+        public static string GetPathParticleDeath()
+        {
+            return "Particle/deathParticle";
         }
     }
 }
