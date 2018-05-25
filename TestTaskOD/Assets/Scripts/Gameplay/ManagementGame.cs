@@ -18,6 +18,7 @@ namespace gameDream
 
         string[] pathEnemyStatic;
         string[] pathBonus;
+
         //статичные препятствия
         List<StaticEnemy> stEnemyList = new List<StaticEnemy>();
         [SerializeField][Range(0, 100)]
@@ -30,6 +31,8 @@ namespace gameDream
 
         float timeStop;//bonus_time
 
+        GameObject insideRenderWorld;
+        GameObject outsideRenderWorld;
 
         public int NextBlockN // тоже самое что и  GamePoints % kBlock
         {
@@ -46,11 +49,24 @@ namespace gameDream
             set {
                 _gamePoints = value;
                 textPoints.text = value.ToString();
+                if(value == 200)
+                {
+                    insideRenderWorld.SetActive(false);
+                    outsideRenderWorld.SetActive(true);
+                }
             }
         }
 
+        void RenderWorld()
+        {
+            insideRenderWorld = GameObject.Find("World/InsidePlanet").gameObject;
+            outsideRenderWorld = GameObject.Find("World/OutsidePlanet").gameObject;
+            outsideRenderWorld.SetActive(false);
+        }
         private void Start()
         {
+            RenderWorld();
+
             pathEnemyStatic = AllFunc.GetPathEnemyStatic();
             pathBonus = AllFunc.GetPathBonus();
 
