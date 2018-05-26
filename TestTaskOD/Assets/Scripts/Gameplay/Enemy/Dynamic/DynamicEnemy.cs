@@ -39,7 +39,10 @@ namespace gameDream
             {
                 JumpEnemy();
             }
-            moveDir.y -= gravity * Time.deltaTime;
+            else
+            {
+                moveDir.y -= gravity * Time.deltaTime;
+            }
             transform.position += moveDir * Time.deltaTime;
         }
         private void OldAge()

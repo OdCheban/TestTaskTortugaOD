@@ -68,10 +68,10 @@ namespace gameDream
                 Action("Right");
             #endif
             if (Input.GetKeyDown(KeyCode.Escape))
-            {
                 SceneManager.LoadScene("scMenu");
-            }
-            moveDir.y -= gravity * Time.deltaTime;
+
+            if (!IsGround())
+                moveDir.y -= gravity * Time.deltaTime;
             controller.Move(moveDir * Time.deltaTime);
         }
 
@@ -111,9 +111,11 @@ namespace gameDream
                         }
                         break;
                 }
-            }else if(Dir == "Forward")//пока игрок в полете игрок вдруг решил много много раз тапать
+            }
+            else
             {
-                moveDir.z *= 2;
+                if (Dir == "Forward")//пока игрок в полете игрок вдруг решил много много раз тапать
+                    moveDir.z *= 2;
             }
         }
     }
