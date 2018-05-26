@@ -94,7 +94,7 @@ namespace gameDream
         void CreateBonus()
         {
             GameObject bonusObj = (GameObject)Instantiate(Resources.Load(pathBonus[Random.Range(0, pathBonus.Length)])) as GameObject;
-            bonusObj.transform.position = new Vector3(Random.Range(eg.bordersSpawnX.x, eg.bordersSpawnX.y), platform[NextBlockN].transform.position.y + 1.0f, platform[NextBlockN].transform.position.z);
+            bonusObj.transform.position = new Vector3(Random.Range(AllFunc.spawnXmin, AllFunc.spawnXmax), platform[NextBlockN].transform.position.y + 1.0f, platform[NextBlockN].transform.position.z);
             bonusObj.transform.SetParent(platform[NextBlockN].transform);
         }
 

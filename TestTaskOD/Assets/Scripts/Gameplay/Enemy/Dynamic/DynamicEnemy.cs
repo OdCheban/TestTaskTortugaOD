@@ -8,7 +8,7 @@ namespace gameDream
     {
         [SerializeField]
         float radiusEnemy;
-        Vector3 moveDir = Vector3.zero;
+        protected Vector3 moveDir = Vector3.zero;
         [SerializeField]
         protected float jumpSpeed;
         [SerializeField]
@@ -19,6 +19,11 @@ namespace gameDream
         bool IsGround()
         {
             return (Physics.Raycast(transform.position, -Vector3.up, radiusEnemy)) ? true : false;
+        }
+
+        void JumpEnemy()
+        { 
+            moveDir = GetDir();
         }
         protected virtual Vector3 GetDir()
         {
@@ -32,21 +37,28 @@ namespace gameDream
         {
             if (IsGround())
             {
-                moveDir = GetDir();
+                JumpEnemy();
             }
             moveDir.y -= gravity * Time.deltaTime;
             transform.position += moveDir * Time.deltaTime;
         }
-        public void OldAge()
+        private void OldAge()
         {
             timerLive += Time.deltaTime;
-            if (timerLive > 5.0f)
+            if (timerLive > 20.0f)
                 Destroy(gameObject);
         }
+
+        protected virtual void CheckExitBound()
+        {
+        }
+        
         private void Update()
         {
             if (!stop)
             {
+                CheckExitBound();
+                OldAge();
                 MoveEnemy();
                 RotateEnemy();
             }

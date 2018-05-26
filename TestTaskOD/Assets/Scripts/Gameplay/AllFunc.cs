@@ -7,6 +7,9 @@ namespace gameDream
 {
     public class AllFunc : MonoBehaviour
     {
+        public static float spawnXmin = -4.5f;
+        public static float spawnXmax = 4.5f;
+
         #if UNITY_ANDROID
         public static void GetAchive(string id)
         {

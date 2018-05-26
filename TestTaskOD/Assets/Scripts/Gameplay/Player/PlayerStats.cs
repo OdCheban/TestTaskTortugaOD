@@ -38,7 +38,6 @@ namespace gameDream
         }
         public void GetSpace(int jumpK)
         {
-            gameObject.tag = "Astronaut";
             spaceObj.SetActive(true);
             GetComponent<EnginePlayer>().gravity = 20;
             GetComponent<EnginePlayer>().KJumpSpace += jumpK;
@@ -46,7 +45,6 @@ namespace gameDream
 
         public void DestroySpace()
         {
-            gameObject.tag = "Player";
             spaceObj.SetActive(false);
             GetComponent<EnginePlayer>().gravity = gravityNow;
         }

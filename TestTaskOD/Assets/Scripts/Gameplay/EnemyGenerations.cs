@@ -8,13 +8,11 @@ namespace gameDream
     public class EnemyGenerations : MonoBehaviour,TimeControl
     {
         ManagementGame mg;
-        public Vector2 bordersSpawnX;
         string[] pathEnemyDynamic;
         List<DynamicEnemy> dynamicEnemy = new List<DynamicEnemy>();
         [SerializeField] float intervalSpawn;
         private GameObject fatherEnemy;
         private float timeStop;
-
 
 
         void Start()
@@ -31,9 +29,7 @@ namespace gameDream
             float enemyScale = obj.transform.localScale.z;
             if (obj.name == "EnemyCylinder(Clone)") //радиус(y) у каждого объекта разный 
                 enemyScale = obj.GetComponent<CapsuleCollider>().height / 2;
-            float xCoord = Random.Range(bordersSpawnX.x, bordersSpawnX.y);
-            if (obj.name == "CubeEnemy(Clone)" && xCoord > bordersSpawnX.y - 2)//2 - далность полета по x у кубика
-                xCoord = 2.8f;
+            float xCoord = Random.Range(AllFunc.spawnXmin, AllFunc.spawnXmax);
             return new Vector3(xCoord, mg.GetCoordLastPos() - ((1 - enemyScale) / 2), mg.GetCoordLastPos() - 1 + ((1 - enemyScale) / 2));
         }
 

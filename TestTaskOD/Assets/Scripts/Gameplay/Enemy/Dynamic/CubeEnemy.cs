@@ -9,9 +9,16 @@ namespace gameDream
     {
         bool side;
         public float speedRotate;
+
+        protected override void CheckExitBound()
+        {
+            if (transform.position.x - 0.2f < AllFunc.spawnXmin || transform.position.x > AllFunc.spawnXmax)
+                moveDir.x *= -1;
+        }
+
         protected override Vector3 GetDir()
         {
-            side = !side;
+            side = (Random.value > 0.5f);
             if(side)
                 return new Vector3(2, jumpSpeed, -1.0f);
             else
