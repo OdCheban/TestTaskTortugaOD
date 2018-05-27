@@ -9,7 +9,7 @@ namespace gameDream
     {
         public static float spawnXmin = -4.5f;
         public static float spawnXmax = 4.5f;
-
+        public static float scaleBlock = 1.25f;
         #if UNITY_ANDROID
         public static void GetAchive(string id)
         {

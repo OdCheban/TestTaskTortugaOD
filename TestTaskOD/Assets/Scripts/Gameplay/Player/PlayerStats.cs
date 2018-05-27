@@ -7,11 +7,22 @@ namespace gameDream
 {
     public class PlayerStats : MonoBehaviour
     {
+        struct PlayerStatsStart
+        {
+            public float gravity,forceJump;
+            public PlayerStatsStart(float g,float f)
+            {
+                gravity = g;
+                forceJump = f;
+            }
+        }
+
         public bool shield;
         GameObject shieldObj;
 
+        EnginePlayer ep;
         GameObject spaceObj;
-        float gravityNow;
+        PlayerStatsStart statsStart;
 
         public AudioClip giveBonusSound;
         AudioSource audioSource;
@@ -23,7 +34,9 @@ namespace gameDream
             spaceObj = transform.Find("Space").gameObject;
             spaceObj.SetActive(false);
             shieldObj.SetActive(false);
-            gravityNow = GetComponent<EnginePlayer>().gravity;
+
+            ep = GetComponent<EnginePlayer>();
+            statsStart = new PlayerStatsStart(ep.gravity, ep.forceJump);
         }
 
         public void GiveBonusSound()
@@ -39,14 +52,16 @@ namespace gameDream
         public void GetSpace(int jumpK)
         {
             spaceObj.SetActive(true);
-            GetComponent<EnginePlayer>().gravity = 20;
-            GetComponent<EnginePlayer>().KJumpSpace += jumpK;
+            ep.gravity = 25;
+            ep.forceJump = 15;
+            ep.KJumpSpace += jumpK;
         }
 
         public void DestroySpace()
         {
             spaceObj.SetActive(false);
-            GetComponent<EnginePlayer>().gravity = gravityNow;
+            ep.gravity = statsStart.gravity;
+            ep.forceJump = statsStart.forceJump;
         }
         public void DestroyShield()
         {
@@ -62,7 +77,7 @@ namespace gameDream
         }
         public void Kill()
         {
-            GetComponent<EnginePlayer>().enabled = false;
+            ep.enabled = false;
             GetComponent<CharacterController>().enabled = false;
 
             GameObject particleDeath = (GameObject)Instantiate(Resources.Load(AllFunc.GetPathParticleDeath())) as GameObject;

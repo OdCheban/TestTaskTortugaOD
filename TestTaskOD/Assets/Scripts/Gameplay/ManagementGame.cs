@@ -63,8 +63,19 @@ namespace gameDream
             outsideRenderWorld = GameObject.Find("World/OutsidePlanet").gameObject;
             outsideRenderWorld.SetActive(false);
         }
+
+        //void GenerWorld()
+        //{
+        //      instianiate(block)
+        //    for(int i = 0; i < platform.Length;i++)
+        //        platform[i].transform.position = new Vector3(0, AllFunc.scaleBlock * i, i*AllFunc.scaleBlock);
+        //    GameObject.Find("RollerBall").transform.position = new Vector3(0, AllFunc.scaleBlock * 6, AllFunc.scaleBlock * 5+0.05f);//старт на 6 блоке
+        // 
+        //}
+
         private void Start()
         {
+            //GenerWorld();
             RenderWorld();
 
             pathEnemyStatic = AllFunc.GetPathEnemyStatic();
@@ -75,9 +86,9 @@ namespace gameDream
             eg = GetComponent<EnemyGenerations>();
         }
 
-        public int GetCoordLastPos()
+        public float GetCoordLastPos()
         {
-            return platform.Length + GamePoints;
+            return (platform.Length + GamePoints) * AllFunc.scaleBlock;
         }
 
         void CreateObstacle()

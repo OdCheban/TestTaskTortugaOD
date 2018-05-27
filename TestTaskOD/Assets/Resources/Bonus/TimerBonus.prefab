@@ -137,4 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedRotate: 100
-  timeStopEnemy: 8
+  timeStopEnemy: 2.5

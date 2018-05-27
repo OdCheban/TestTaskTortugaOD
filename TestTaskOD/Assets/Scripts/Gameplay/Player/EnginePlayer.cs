@@ -12,7 +12,7 @@ namespace gameDream
         ManagementGame GameControl;
         public Vector3 moveDir = Vector3.zero;
         public float gravity;
-        public float jumpSpeed;
+        public float forceJump;
         private float radiusPlayer;
         CharacterController controller;
         float intervalJump;
@@ -29,19 +29,22 @@ namespace gameDream
             }
         }
         bool destroySpaceAfterJump;
+
         bool jump;
+        float startJumpY;
 
         private void Start()
         {
             audioSource = GetComponent<AudioSource>();
             GameControl = GameObject.Find("GamePlay").GetComponent<ManagementGame>();
             controller = GetComponent<CharacterController>();
-            radiusPlayer = GetComponent<CharacterController>().radius + 0.1f;
+            radiusPlayer = GetComponent<CharacterController>().radius+0.15f;//0.15f offset
+            //GetComponent<Renderer>().bounds.extents.magnitude/2
         }
 
         bool IsGround()
         {
-            return (Physics.Raycast(transform.position, Vector3.forward, radiusPlayer) && Physics.Raycast(transform.position, -Vector3.up, radiusPlayer)) ? true : false;
+            return (Physics.Raycast(transform.position, Vector3.forward, radiusPlayer*2.0f) && Physics.Raycast(transform.position, -Vector3.up, radiusPlayer)) ? true : false;
         }
 
         void IfSpaceBonus()
@@ -71,7 +74,12 @@ namespace gameDream
                 SceneManager.LoadScene("scMenu");
 
             if (!IsGround())
+            {
                 moveDir.y -= gravity * Time.deltaTime;
+            }
+
+            if (jump && (int)transform.position.y > startJumpY+1.25f)//если игрок пролетел ровно на одну платформу jump = false
+                jump = false;
             controller.Move(moveDir * Time.deltaTime);
         }
 
@@ -79,9 +87,14 @@ namespace gameDream
         {
             float z = (intervalJump < 0.5f) ? 4/intervalJump : 4; // 4 - test...
             intervalJump = 0.0f;
-            return new Vector3(0, jumpSpeed, z);
+            return new Vector3(0, forceJump, z);
         }
 
+        void CheckFullJump()
+        {
+            jump = true;
+            startJumpY = transform.position.y;
+        }
         public void Action(string Dir)
         {
             if (IsGround())
@@ -93,21 +106,25 @@ namespace gameDream
                         GameControl.NextPlatform();
                         moveDir = GetForceJumpForward();
                         audioSource.PlayOneShot(jumpSound);
+                        CheckFullJump();
                         break;
                     case "Left":
-                        moveDir = new Vector3(-3, jumpSpeed, 0);
+                        moveDir = new Vector3(-3, forceJump, 0);
                         audioSource.PlayOneShot(jumpSound);
                         break;
                     case "Right":
-                        moveDir = new Vector3(3, jumpSpeed, 0);
+                        moveDir = new Vector3(3, forceJump, 0);
                         audioSource.PlayOneShot(jumpSound);
                         break;
                     case "Idle":
-                        moveDir = Vector3.zero;
-                        if (destroySpaceAfterJump)
+                        if (!jump)
                         {
-                            GetComponent<PlayerStats>().DestroySpace();
-                            destroySpaceAfterJump = false;
+                            moveDir = Vector3.zero;
+                            if (destroySpaceAfterJump)
+                            {
+                                GetComponent<PlayerStats>().DestroySpace();
+                                destroySpaceAfterJump = false;
+                            }
                         }
                         break;
                 }
