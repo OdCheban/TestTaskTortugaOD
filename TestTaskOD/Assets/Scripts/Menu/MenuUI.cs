@@ -84,7 +84,7 @@ namespace gameDream
         }
         public void LikeGame()
         {
-
+            Application.OpenURL("https://play.google.com/store/apps/details?id=com.elsetell.voxeljump");
         }
     }
 }
