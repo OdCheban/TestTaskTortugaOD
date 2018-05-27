@@ -9,8 +9,8 @@ namespace gameDream
     public class SwipePlayer : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         private EnginePlayer player;
+        private Vector2 startTouchPos;
 
-        float time;
         void Start()
         {
             player = GameObject.Find("RollerBall").GetComponent<EnginePlayer>();
@@ -19,13 +19,12 @@ namespace gameDream
         {
             if (Input.touchCount >= 1)
             {
-                if (Input.touches[0].phase == TouchPhase.Stationary) 
-                    time += Time.deltaTime;
+                if (Input.touches[0].phase == TouchPhase.Stationary)
+                    startTouchPos = Input.GetTouch(0).position;
                 else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)
                 {
-                    if (time < 0.15f)
+                    if (startTouchPos == Input.GetTouch(0).position)
                         player.Action("Forward");
-                    time = 0;
                 }
             }
             else

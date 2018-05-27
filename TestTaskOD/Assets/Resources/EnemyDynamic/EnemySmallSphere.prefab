@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusEnemy: 0.35
-  jumpSpeed: 10
+  jumpSpeed: 11.5
   gravity: 20
 --- !u!135 &135980197247627290
 SphereCollider:

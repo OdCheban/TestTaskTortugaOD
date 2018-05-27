@@ -108,6 +108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusEnemy: 0.35
-  jumpSpeed: 10
+  jumpSpeed: 13
   gravity: 20
   speedRotate: 100
