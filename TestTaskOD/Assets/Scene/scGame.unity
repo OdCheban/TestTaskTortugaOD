@@ -203,7 +203,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1
   m_Radius: 0.5
-  m_SlopeLimit: 0
+  m_SlopeLimit: 0.3
   m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -3463,14 +3463,14 @@ MonoBehaviour:
   prefab:
   - {fileID: 1258239721429732, guid: 00578cb822b4061488127a7bc93cfe50, type: 2}
   - {fileID: 1960206463155294, guid: 024f7036ac88acc49802bc18e51feb24, type: 2}
-  chanceObstacle: 0
+  chanceSpawn: 40
 --- !u!114 &1609960428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1609960424}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0770002e5f9d8e4b97907e015fbf582, type: 3}
   m_Name: 
@@ -3497,7 +3497,7 @@ MonoBehaviour:
   - {fileID: 1544396707214624, guid: aefe8e0e253e8d747b98b9d228fe74c2, type: 2}
   - {fileID: 1130669435434470, guid: 6e46838b40697fa47a2c84b1b7d9afa4, type: 2}
   - {fileID: 1140351018180544, guid: 7495274c21bae7f44893296d9ccd7ddf, type: 2}
-  chanceBonus: 38
+  chanceSpawn: 43
 --- !u!1 &1694259029
 GameObject:
   m_ObjectHideFlags: 0
