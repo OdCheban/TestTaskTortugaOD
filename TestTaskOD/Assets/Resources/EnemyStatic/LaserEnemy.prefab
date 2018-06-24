@@ -71,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709346626803496}
   - component: {fileID: 114496149848280058}
+  - component: {fileID: 114738157008099128}
   m_Layer: 2
   m_Name: LaserEnemy
   m_TagString: EnemyStatic
@@ -513,6 +514,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 2
+--- !u!114 &114738157008099128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258239721429732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a773d61bc3034f94cbcb3d3b3331300c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
 --- !u!114 &114895255646680168
 MonoBehaviour:
   m_ObjectHideFlags: 1

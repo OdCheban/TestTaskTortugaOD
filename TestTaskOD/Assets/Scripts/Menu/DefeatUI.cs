@@ -22,9 +22,9 @@ namespace gameDream
         void FinishUI(int point)
         {
             transform.root.Find("PointsText").GetComponent<Text>().enabled = false;
-            pointsText.text = point + "!";
-            transform.GetChild(0).gameObject.SetActive(true);
             transform.Find("Panel/TopPanel").GetComponent<EasyTween>().enabled = true;
+            transform.GetChild(0).gameObject.SetActive(true);
+            pointsText.text = point + "!";
             recordText.text = "Рекорд: " + PlayerPrefs.GetInt("score");
         }
 
@@ -51,7 +51,6 @@ namespace gameDream
         }
         public void Restart()
         {
-            Time.timeScale = 1.0f;
             SceneManager.LoadScene("scGame");
         }
         #if UNITY_ANDROID

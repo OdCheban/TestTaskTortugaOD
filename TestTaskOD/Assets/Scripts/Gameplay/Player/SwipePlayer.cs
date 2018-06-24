@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-#if UNITY_ANDROID
+
 namespace gameDream
 {
     public class SwipePlayer : MonoBehaviour, IDragHandler, IEndDragHandler
     {
+#if UNITY_ANDROID
         private EnginePlayer player;
         private Vector2 startTouchPos;
 
@@ -43,6 +42,6 @@ namespace gameDream
             else
                 player.Action("Left");
         }
+#endif
     }
 }
-#endif

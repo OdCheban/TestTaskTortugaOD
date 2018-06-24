@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65307406913366064}
   - component: {fileID: 23603082145176550}
   - component: {fileID: 114195411246732760}
+  - component: {fileID: 114067184354204080}
   m_Layer: 2
   m_Name: CubeEnemy
   m_TagString: EnemyDynamic
@@ -96,6 +97,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114067184354204080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033299209705174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a773d61bc3034f94cbcb3d3b3331300c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
 --- !u!114 &114195411246732760
 MonoBehaviour:
   m_ObjectHideFlags: 1
