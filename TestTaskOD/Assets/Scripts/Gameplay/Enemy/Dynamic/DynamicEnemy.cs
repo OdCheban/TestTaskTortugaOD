@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace gameDream
 {
-    public class DynamicEnemy : MonoBehaviour, TimeControl
+    public class DynamicEnemy : MonoBehaviour
     {
         [SerializeField]
         float radiusEnemy;
@@ -13,16 +13,15 @@ namespace gameDream
         protected float jumpSpeed;
         [SerializeField]
         float gravity;
-        float timerLive;
-        bool stop;
-        
+        public float timerLive;
+
         bool IsGround()
         {
             return (Physics.Raycast(transform.position, -Vector3.up, radiusEnemy)) ? true : false;
         }
 
         void JumpEnemy()
-        { 
+        {
             moveDir = GetDir();
         }
         protected virtual Vector3 GetDir()
@@ -30,9 +29,8 @@ namespace gameDream
             return new Vector3(0, jumpSpeed, -1.0f);
         }
         protected virtual void RotateEnemy()
-        {
-            
-        }
+        {}
+
         private void MoveEnemy()
         {
             if (IsGround())
@@ -45,28 +43,22 @@ namespace gameDream
             }
             transform.position += moveDir * Time.deltaTime;
         }
-        private void OldAge()
-        {
-            timerLive += Time.deltaTime;
-            if (timerLive > 20.0f)
-                Destroy(gameObject);
-        }
 
         protected virtual void CheckExitBound()
         {
         }
-        
-        private void Update()
+
+
+        public bool Action()
         {
-            if (!stop)
-            {
-                CheckExitBound();
-                OldAge();
-                MoveEnemy();
-                RotateEnemy();
-            }
+            CheckExitBound();
+            MoveEnemy();
+            RotateEnemy();
+
+            timerLive -= Time.deltaTime;
+            return (timerLive > 0);
         }
-        
+
         void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")
@@ -74,24 +66,14 @@ namespace gameDream
                 if (other.GetComponent<PlayerStats>().shield)
                 {
                     other.GetComponent<PlayerStats>().DestroyShield();
-                    Destroy(gameObject);
+                    timerLive = 0;
+                    //Destroy(gameObject);
                 }
                 else
                 {
                     other.GetComponent<PlayerStats>().Kill();
                 }
             }
-        }
-
-        public void StopEnemy(float sec)
-        {
-            stop = true;
-            Invoke("СontinueEnemy", sec);
-        }
-
-        public void СontinueEnemy()
-        {
-            stop = false;
         }
     }
 }

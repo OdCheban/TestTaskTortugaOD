@@ -21,7 +21,7 @@ namespace gameDream
                 if (other.GetComponent<PlayerStats>() && other.GetComponent<PlayerStats>().shield)
                 {
                     other.GetComponent<PlayerStats>().DestroyShield();
-                    Destroy(GetParent());
+                    GetParent().SetActive(false);
                 }
                 else
                 {

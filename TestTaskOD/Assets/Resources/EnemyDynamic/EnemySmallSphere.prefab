@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114009926692552750}
   m_Layer: 2
   m_Name: EnemySmallSphere
-  m_TagString: Untagged
+  m_TagString: EnemyDynamic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   radiusEnemy: 0.35
   jumpSpeed: 11.5
   gravity: 20
+  timerLive: 0
 --- !u!135 &135980197247627290
 SphereCollider:
   m_ObjectHideFlags: 1

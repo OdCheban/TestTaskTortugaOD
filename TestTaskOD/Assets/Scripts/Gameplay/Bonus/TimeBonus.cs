@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace gameDream
 {
     public class TimeBonus : Bonus
     {
-        ManagementGame mg;
+        ManagementGame poolControl;
         [SerializeField]
         float timeStopEnemy;
 
         protected override void BonusAdd(Transform other)
         {
-            mg = GameObject.Find("GamePlay").GetComponent<ManagementGame>();
-            mg.StopEnemy(timeStopEnemy);
+            poolControl= GameObject.Find("GamePlay").GetComponent<ManagementGame>();
+            poolControl.Stop(timeStopEnemy);
         }
     }
 }

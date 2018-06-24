@@ -80,7 +80,7 @@ namespace gameDream
             ep.enabled = false;
             GetComponent<CharacterController>().enabled = false;
 
-            GameObject particleDeath = (GameObject)Instantiate(Resources.Load(AllFunc.GetPathParticleDeath())) as GameObject;
+            GameObject particleDeath = Instantiate(Resources.Load(AllFunc.GetPathParticleDeath())) as GameObject;
             particleDeath.transform.position = transform.position;
             OffRender();
             Invoke("DefeatGame", 1.5f);

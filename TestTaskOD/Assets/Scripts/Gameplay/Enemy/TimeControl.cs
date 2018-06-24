@@ -1,12 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace gameDream
+﻿interface TimeControl
 {
-    public interface TimeControl
-    {
-        void StopEnemy(float sec);
-        void СontinueEnemy();
-    }
+    void Stop(float time);
 }

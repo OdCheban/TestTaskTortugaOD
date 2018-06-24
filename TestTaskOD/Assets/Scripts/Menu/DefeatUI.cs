@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -21,29 +19,35 @@ namespace gameDream
         private const string leaderBoard = "CgkIyLf06YcTEAIQBA";
         #endif
 
-        public void ActivateDefeate()
+        void FinishUI(int point)
         {
-            int point = GameObject.Find("GamePlay").GetComponent<ManagementGame>().GamePoints;
             transform.root.Find("PointsText").GetComponent<Text>().enabled = false;
-            pointsText.text = point+ "!";
+            pointsText.text = point + "!";
             transform.GetChild(0).gameObject.SetActive(true);
             transform.Find("Panel/TopPanel").GetComponent<EasyTween>().enabled = true;
+            recordText.text = "Рекорд: " + PlayerPrefs.GetInt("score");
+        }
 
-            if (point > PlayerPrefs.GetInt("score"))
-            {
+        void RefreshStats(int point)
+        {
+            if (point > PlayerPrefs.GetInt("score")) //или же синглтон в объекте(донтдестройонлоад), тогда не придется каждый раз обращаться к памяти 
                 PlayerPrefs.SetInt("score", point);
-                #if UNITY_ANDROID
-                Social.ReportScore(point, leaderBoard, (bool success) =>{
-                      if (success) Debug.Log("new record");
-                  });
-                #endif
-            }
+
             #if UNITY_ANDROID
+            Social.ReportScore(point, leaderBoard, (bool success) =>{
+                if (success) Debug.Log("new record");
+            });
             AllFunc.GetAchive(achiv3);
             if(point >= 10)
                 AllFunc.GetAchive(achiv2);
-            #endif
-            recordText.text = "Рекорд: " + PlayerPrefs.GetInt("score");
+#           endif
+        }
+
+        public void ActivateDefeate()
+        {
+            int point = GameObject.Find("GamePlay").GetComponent<ManagementGame>().GamePoints;
+            RefreshStats(point);
+            FinishUI(point);
         }
         public void Restart()
         {

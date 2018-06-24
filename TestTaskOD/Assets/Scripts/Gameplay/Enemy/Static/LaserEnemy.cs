@@ -9,38 +9,31 @@ namespace gameDream
         [SerializeField]
         float interval;
         bool on;
-        static IEnumerator coroutine;
 
         protected override GameObject GetItemKill()
         {
-            coroutine = LaserOn();
             GameObject laser = transform.Find("Laser").gameObject;
             laser.SetActive(false);
             return laser;
         }
 
-        protected override void DeactivateItemKill()
+        public override void DeactivateItemKill()
         {
             on = false;
             itemKill.SetActive(on);
-            StopCoroutine(coroutine);
+            StopCoroutine("LaserOn");
         }
-        protected override void ActivateItemKill()
+        public override void ActivateItemKill()
         {
-            coroutine = LaserOn();
-            StartCoroutine(coroutine);
+            StartCoroutine("LaserOn");
         }
 
         private IEnumerator LaserOn()
         {
             while (true)
             {
-                if (timeStop < 0)
-                {
-                    on = !on;
-                    itemKill.SetActive(on);
-                }
-                else yield return null;
+                on = !on;
+                itemKill.SetActive(on);
                 yield return new WaitForSeconds(interval);
             }
         }

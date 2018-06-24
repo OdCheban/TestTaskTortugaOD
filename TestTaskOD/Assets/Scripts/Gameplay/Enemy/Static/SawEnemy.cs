@@ -10,11 +10,11 @@ namespace gameDream
         {
             return transform.Find("DynamicSaw").gameObject;
         }
-        protected override void DeactivateItemKill()
+        public override void DeactivateItemKill()
         {
             itemKill.GetComponent<Animator>().enabled = false;
         }
-        protected override void ActivateItemKill()
+        public override void ActivateItemKill()
         {
             itemKill.GetComponent<Animator>().enabled = true;
         }

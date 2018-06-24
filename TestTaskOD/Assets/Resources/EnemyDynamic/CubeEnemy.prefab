@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114195411246732760}
   m_Layer: 2
   m_Name: CubeEnemy
-  m_TagString: Untagged
+  m_TagString: EnemyDynamic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,4 +110,5 @@ MonoBehaviour:
   radiusEnemy: 0.35
   jumpSpeed: 13
   gravity: 20
+  timerLive: 5
   speedRotate: 100
